@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Analyzer</title>
+  <link rel="icon" href="Images/Truth4.png">
+
+  <link rel="stylesheet" href="/css/style.css">
+
+  
+</head>
+<body>
+  <!-- Navbar -->
+  <%- include('partials/navbar.ejs') %>
+  <div class="content">
+    <h1>Welcome to Health Product Analyzer</h1>
+    <p>Search and analyze health products to know what's best for you!</p>
+  </div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Find the Best Health Products</h1>
+      <p>Compare ingredients, reviews, and health impact to make an informed choice!</p>
+      <button onclick="window.location.href='/products'">Explore Products</button>
+    </div>
+  </section>
+
+  <section class="featured-products">
+    <h2>Featured Health Products</h2>
+    <div class="products-container">
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpQAv8dwgXxbP14tp6uPNGNhVWy7Ae-l_QkQ&s" alt="Product 1" class="main-image">
+        </div>
+        <h3>Health Supplement - Vitamin C (500mg)</h3>
+        <p class="rating">⭐⭐⭐⭐⭐</p>
+        <p class="price">₹349</p>
+
+        <button onclick="window.location.href='/products/67f7e4a56e38160b004125f1'">View Details</button>
+        <form action="/add-to-cart/67f7e4a56e38160b004125f1" method="POST">
+          <button type="submit">Add to Cart</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKK1jHtB1KYkiwaZa7OTn_NW7eDorsHOylrg&s" alt="Product 2" class="main-image">
+          
+        </div>
+        <h3>Top-rated vitamins- Vitamin D</h3>
+        <p class="rating">⭐⭐⭐⭐</p>
+        <p class="price">₹299</p>
+        <button onclick="window.location.href='/products/67f7e4f96e38160b004125f3'">View Details</button>
+        <form action="/add-to-cart/67f7e4f96e38160b004125f3" method="POST">
+          <button type="submit">Add to Cart</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWJEuNAf6lk5avFYOyUFjhKZC2wN_UIbFdJw&s" alt="Product 3" class="main-image">
+          
+        </div>
+        <h3>Best-reviewed health product-Himalaya Shilajit Capsules 60 Caps</h3>
+        <p class="rating">⭐⭐⭐⭐⭐</p>
+        <p class="price">₹599</p>
+        <button onclick="window.location.href='/products/67f7e5196e38160b004125f5'">View Details</button>
+        <form action="/add-to-cart/67f7e5196e38160b004125f5" method="POST">
+          <button type="submit">Add to Cart</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw9kVlMaMFXKohK7Jglv3dPZjA_ek0FdvjhQ&s" alt="Product 4" class="main-image">
+          
+        </div>
+        <h3>Popular skincare products- citaphil Skin Cleanser</h3>
+        <p class="rating">⭐⭐⭐⭐</p>
+        <p class="price">₹749</p>
+        <button onclick="window.location.href='/products/67f7e53a6e38160b004125f7'">View Details</button>
+        <form action="/add-to-cart/67f7e53a6e38160b004125f7" method="POST">
+          <button type="submit">Add to Cart</button>
+        </form>
+      </div>
+      <!-- Add more product cards as needed -->
+    </div>
+  </section>
+  
+
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps-container">
+      <div class="step">
+        <h3>Step 1</h3>
+        <p>Search for health products by category, brand, or ingredient.</p>
+      </div>
+      <div class="step">
+        <h3>Step 2</h3>
+        <p>Compare product ingredients, reviews, and ratings.</p>
+      </div>
+      <div class="step">
+        <h3>Step 3</h3>
+        <p>Make an informed decision and choose the best product for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="testimonial-cards">
+      <div class="testimonial-card">
+        <p>"This website helped me find the best vitamins for my health!"</p>
+        <h4>- John Doe</h4>
+      </div>
+      <div class="testimonial-card">
+        <p>"I love how I can compare the ingredients and reviews before purchasing!"</p>
+        <h4>- Jane Smith</h4>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <%- include('partials/footer.ejs') %>
+
+</body>
+</html>
