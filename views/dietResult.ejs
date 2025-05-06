@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Diet Plan</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+      padding: 30px;
+      margin-bottom: 25px;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.01);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2b6777;
+      margin-bottom: 20px;
+    }
+
+    .goal-info {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .meal-title {
+      font-size: 22px;
+      color: #52ab98;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+
+    ul li {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      padding: 10px 20px;
+      background: #52ab98;
+      color: white;
+      border-radius: 8px;
+      text-align: center;
+      transition: background 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #3b8b78;
+    }
+  </style>
+</head>
+<body>
+    <!-- Navbar -->
+   <%- include('partials/navbar.ejs') %>
+  <div class="container">
+    <h1>Your Personalized Daily Diet Plan</h1>
+
+    <div class="goal-info">
+      <strong>Goal:</strong> <%= goal %> <br/>
+      <strong>Target Calories:</strong> <%= targetCalories %> kcal/day
+    </div>
+
+    <div class="card">
+      <div class="meal-title">🥣 Breakfast</div>
+      <ul>
+        <% dietPlan.breakfast.forEach(item => { %>
+          <li><%= item %></li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="meal-title">🍱 Lunch</div>
+      <ul>
+        <% dietPlan.lunch.forEach(item => { %>
+          <li><%= item %></li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="meal-title">🍽️ Dinner</div>
+      <ul>
+        <% dietPlan.dinner.forEach(item => { %>
+          <li><%= item %></li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <div style="text-align: center;">
+      <a href="/user/dashboard" class="back-btn">← Back to Dashboard</a>
+    </div>
+  </div>
+  <!-- Footer -->
+  <%- include('partials/footer.ejs') %>
+</body>
+</html>

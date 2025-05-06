@@ -23,7 +23,20 @@ const userSchema = new mongoose.Schema({
         default: 1
       }
     }
-  ]
+  ],
+  weight: Number, // in kg
+  height: Number, // in cm
+  healthGoal: {
+    type: String,
+    enum: ["Lose Weight", "Maintain Weight", "Gain Muscle"],
+    default: "Maintain Weight"
+  },
+  activityLevel: {
+    type: String,
+    enum: ["Sedentary", "Moderate", "Active"],
+    default: "Moderate"
+  }
+  
 });
 
 // Password hashing

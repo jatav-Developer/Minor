@@ -49,7 +49,7 @@ router.get("/login", (req, res) => {
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ username }).populate('cart.productId');
   if (!user) return res.send("User not found");
 
   const isMatch = await user.comparePassword(password);

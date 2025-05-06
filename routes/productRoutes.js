@@ -6,6 +6,7 @@ const Product = require('../models/product');
 router.get('/', async (req, res) => {
   try {
     const products = await Product.find();
+    //  products = products.reverse();
     res.render('products', { products });
   } catch (err) {
     res.status(500).send('Error fetching products');

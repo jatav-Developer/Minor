@@ -123,6 +123,25 @@
     .checkout-btn:hover {
       background-color: #1e8449;
     }
+    .product-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .product-footer a {
+      padding: 14px 28px;
+      border-radius: 14px;
+      background-color: #0077ff;
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .product-footer a:hover {
+      background-color: #005fd9;
+    }
 
     .remove-btn {
   padding: 6px 14px;
@@ -158,7 +177,9 @@
             <th>Price</th>
             <th>Quantity</th>
             <th>Total</th>
+            <th>Buy</th>
             <th>Remove</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -178,6 +199,15 @@
               </td>
               <td>₹<%= total %></td>
               <td>
+                <% if (item.productId.availabilityLinks.length) { %>
+                  <div class="product-footer">
+                    <% item.productId.availabilityLinks.forEach(link => { %>
+                      <a href="<%= link %>" target="_blank">🛒 Buy Now</a>
+                    <% }) %>
+                  </div>
+                <% } %>
+                </td>
+              <td>
                 <form action="/cart/remove/<%= item.productId._id %>" method="POST" onsubmit="return confirm('Remove this item?');">
                   <button type="submit" class="remove-btn">Remove</button>
                 </form>
@@ -186,18 +216,12 @@
             </tr>
           <% }) %>
           <tr class="cart-grand-total-row">
-            <td colspan="4" class="grand-total-label">Grand Total:</td>
+            <td colspan="5" class="grand-total-label">Grand Total:</td>
             <td><strong>₹<%= grandTotal %></strong></td>
           </tr>
         </tbody>
       </table>
 
-      <div class="checkout-section">
-        <span></span>
-        <form action="/checkout" method="POST">
-          <button type="submit" class="checkout-btn">Proceed to Checkout</button>
-        </form>
-      </div>
     <% } %>
   </div>
 
