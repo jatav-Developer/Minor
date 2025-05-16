@@ -1,0 +1,35 @@
+<nav class="navbar">
+  <div class="logo">
+    <a href="/">Product Analyzer</a>
+  </div>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/products">Products</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <% if (session && session.userId) { %>
+      <% if (session.isAdmin) { %>
+        <a href="/admin/dashboard">🛠 Admin Panel</a>
+      <% } else { %>
+        <a href="/user/dashboard">Dashboard</a>
+      <% } %>
+    <% } %>
+    <% if (typeof session !== "undefined" && session.userId) { %>
+      <!-- <a href="/cart" >🛍 View Cart</a> -->
+      <a href="/logout">Logout</a>
+    <% } else { %>
+      <a href="/login" >Login</a>
+      <a href="/signup" >Signup</a>
+    <% } %>
+  </div>
+
+  <div class="search-box">
+    <form action="/products/search" method="GET">
+      <input type="text" name="q" placeholder="Search products by name, brand or category..." />
+      <button type="submit">Search</button>
+    </form>
+  </div>
+  
+</nav>
+
+  

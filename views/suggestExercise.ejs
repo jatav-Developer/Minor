@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Workout Plan</title>
+  <link rel="icon" href="Images/Truth4.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* Import Google Fonts */
+
+:root {
+  --primary-color: #4f5d75;
+  --primary-dark: #2d3142;
+  --accent-color: #ffa726;
+  --bg-gradient-start: #f0f4f8;
+  --bg-gradient-end: #d9e2ec;
+  --tip-bg: #e2ecf5;
+  --panel-bg: #f8f9fa;
+  --note-bg: #fff5e6;
+  --text-color: #2d3142;
+  --tip-title-color: #1d3557;
+  --shadow-light: rgba(0, 0, 0, 0.07);
+  --shadow-dark: rgba(0, 0, 0, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body{
+    text-align: unset;
+}
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px var(--shadow-light), 0 4px 12px var(--shadow-dark);
+  padding: 40px 50px;
+  transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+  box-shadow: 0 12px 36px var(--shadow-dark), 0 6px 18px var(--shadow-dark);
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.75rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  user-select: none;
+}
+
+.user-info {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1rem;
+  color: #475569;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.accordion {
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  padding: 16px 22px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  margin-top: 15px;
+  border-radius: 12px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: background 0.3s ease, transform 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  position: relative;
+}
+
+.accordion::after {
+  content: '➕';
+  font-size: 1.25rem;
+  transition: transform 0.3s ease;
+  color: #cbd5e1;
+}
+
+.accordion.active::after {
+  content: '➖';
+  transform: rotate(180deg);
+  color: #fbbf24;
+}
+
+.accordion:hover, .accordion.active {
+  background-color: var(--primary-dark);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transform: translateY(-2px);
+}
+
+.panel {
+  background: var(--panel-bg);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0 24px;
+  border-radius: 0 0 12px 12px;
+  margin-bottom: 12px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.panel p, .panel ul {
+  margin: 16px 0;
+  font-size: 1rem;
+  color: #334155;
+}
+
+.exercise-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.exercise-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid #d1d5db;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.exercise-list li:last-child {
+  border-bottom: none;
+}
+
+.tips-section {
+  margin-top: 50px;
+}
+
+.tip {
+  background-color: var(--tip-bg);
+  margin-bottom: 20px;
+  padding: 20px 25px;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.tip:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.tip h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: var(--tip-title-color);
+  font-weight: 700;
+  font-size: 1.25rem;
+  user-select: none;
+}
+
+.tip p {
+  color: #475569;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.note {
+  margin-top: 30px;
+  background: var(--note-bg);
+  padding: 20px 25px;
+  border-left: 6px solid var(--accent-color);
+  border-radius: 10px;
+  font-style: italic;
+  color: #92400e;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 10px rgba(255, 167, 38, 0.15);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 25px 20px;
+    margin: 20px 15px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+
+  .accordion {
+    font-size: 1rem;
+    padding: 14px 18px;
+  }
+
+  .panel {
+    padding: 0 16px;
+  }
+
+  .tip {
+    padding: 15px 20px;
+  }
+
+  .note {
+    padding: 15px 20px;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+     <!-- Navbar -->
+  <%- include('partials/navbar.ejs') %>
+  <div class="container">
+    <h1>🏋️‍♂️ Weekly Workout Plan</h1>
+    
+    <div class="week-split">
+      <% data.workoutPlan.split.forEach((day, idx) => { %>
+        <button class="accordion"><%= day %></button>
+        <div class="panel">
+          <% 
+            const dayName = day.split(":")[0].trim();
+            const details = data.workoutPlan.detailedPlan[dayName];
+          %>
+          <% if (details.focus) { %>
+            <p><strong>Focus:</strong> <%= details.focus %></p>
+          <% } %>
+          <% if (details.warmUp) { %>
+            <p><strong>Warm-up:</strong> <%= details.warmUp %></p>
+          <% } %>
+          <% if (details.exercises) { %>
+            <ul class="exercise-list">
+              <% details.exercises.forEach(ex => { %>
+                <li><strong><%= ex.name %></strong> — <%= ex.sets %> sets x <%= ex.reps || ex.duration %></li>
+              <% }) %>
+            </ul>
+          <% } %>
+          <% if (details.coolDown) { %>
+            <p><strong>Cool-down:</strong> <%= details.coolDown %></p>
+          <% } %>
+          <% if (details.description) { %>
+            <p><%= details.description %></p>
+          <% } %>
+        </div>
+      <% }) %>
+    </div>
+
+    <div class="tips-section">
+      <h2>💡 Tips for Muscle Gain</h2>
+      <% data.workoutPlan.tipsForMuscleGain.forEach(tip => { %>
+        <div class="tip">
+          <h3><%= tip.title %></h3>
+          <p><%= tip.details %></p>
+        </div>
+      <% }) %>
+    </div>
+
+    <div class="note">
+      <p><em><%= data.workoutPlan.note %></em></p>
+    </div>
+  </div>
+
+  <script>
+    const accordions = document.querySelectorAll(".accordion");
+    accordions.forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.classList.toggle("active");
+        const panel = btn.nextElementSibling;
+        panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + "px";
+      });
+    });
+  </script>
+   <!-- Footer -->
+  <%- include('partials/footer.ejs') %>
+</body>
+</html>

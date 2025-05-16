@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="Images/Truth4.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f8fb;
+    }
+    .dashboard-container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    .health-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  .health-card {
+    width: 320px;
+    background: linear-gradient(135deg, #f9f9f9, #e8f0fe);
+    border-radius: 16px;
+    padding: 25px 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+  }
+
+  .health-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .health-card h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 1.4rem;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #34495e;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    outline: none;
+    font-size: 14px;
+    background-color: #fff;
+  }
+
+  .health-card button {
+    background: #1abc9c;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .health-card button:hover {
+    background: #16a085;
+  }
+
+  .result {
+    margin-top: 15px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #2c3e50;
+  }
+
+  @media (max-width: 768px) {
+    .health-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .health-card.sleep {
+  border-left: 5px solid #6c5ce7;
+  background: #f5f3ff;
+}
+
+#sleepResult {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.sleep-good {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.sleep-poor {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.sleep-extra {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+  </style>
+</head>
+<body>
+
+
+    <!-- Navbar -->
+  <%- include('partials/navbar.ejs') %>
+
+  <div class="dashboard-container">
+    <h2>Track Your health, <%= user.fullName %>!</h2>
+
+  <div class="health-container">
+    <!-- BMI Card -->
+    <div class="health-card bmi">
+      <h2>📏 BMI Calculator</h2>
+      <form id="bmiForm">
+        <div class="form-group">
+          <label for="height">Height (cm)</label>
+          <input type="number" id="height" placeholder="170" required>
+        </div>
+        <div class="form-group">
+          <label for="weight">Weight (kg)</label>
+          <input type="number" id="weight" placeholder="65" required>
+        </div>
+        <button type="submit">Calculate</button>
+        <p id="bmiResult" class="result"></p>
+      </form>
+    </div>
+  
+    <!-- Water Intake Card -->
+    <div class="health-card water">
+      <h2>💧 Water Tracker</h2>
+      <form id="waterForm">
+        <div class="form-group">
+          <label for="glasses">Glasses today</label>
+          <input type="number" id="glasses" placeholder="e.g., 8" min="0" max="20" required>
+        </div>
+        <button type="submit">Update</button>
+        <p id="waterResult" class="result"></p>
+      </form>
+    </div>
+
+    <!-- Calorie Tracker Card -->
+    <div class="health-card calorie">
+      <h2>🫀 Calorie Tracker</h2>
+      <form id="calorieForm">
+        <div class="form-group">
+          <label for="food">Food Item</label>
+          <input type="text" id="food" placeholder="e.g., Apple">
+        </div>
+        <div class="form-group">
+          <label for="calories">Calories</label>
+          <input type="number" id="calories" placeholder="e.g., 95">
+        </div>
+        <button type="submit">Add</button>
+        <p class="result" id="calorieSummary">Today's total: 0 kcal</p>
+        <ul id="calorieList" style="margin-top: 10px; padding-left: 20px;"></ul>
+      </form>
+    </div>
+
+    <!-- Sleep Tracker Card -->
+    <div class="health-card sleep">
+      <h2>😴 Sleep Tracker</h2>
+      <form id="sleepForm">
+        <div class="form-group">
+          <label for="sleepTime">Sleep Time</label>
+          <input type="time" id="sleepTime" required>
+        </div>
+        <div class="form-group">
+          <label for="wakeTime">Wake Time</label>
+          <input type="time" id="wakeTime" required>
+        </div>
+        <button type="submit">Calculate</button>
+        <p class="result" id="sleepResult">No data yet.</p>
+      </form>
+    </div>
+</div>
+</div>
+  <script>
+    document.getElementById("bmiForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const height = parseFloat(document.getElementById("height").value) / 100;
+      const weight = parseFloat(document.getElementById("weight").value);
+      const bmi = (weight / (height * height)).toFixed(2);
+  
+      let message = `Your BMI is ${bmi}. `;
+      if (bmi < 18.5) message += "You're underweight.";
+      else if (bmi < 25) message += "You're healthy.";
+      else if (bmi < 30) message += "You're overweight.";
+      else message += "You're obese.";
+  
+      document.getElementById("bmiResult").innerText = message;
+    });
+  
+    document.getElementById("waterForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const glasses = parseInt(document.getElementById("glasses").value);
+      document.getElementById("waterResult").innerText =
+        `Great! You've had ${glasses} glasses of water today.`;
+    });
+
+      // Calorie Tracker
+  let totalCalories = 0;
+
+  document.getElementById("calorieForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const food = document.getElementById("food").value.trim();
+    const cal = parseInt(document.getElementById("calories").value);
+
+    if (!food || isNaN(cal) || cal <= 0) return;
+
+    totalCalories += cal;
+
+    const listItem = document.createElement("li");
+    listItem.textContent = `${food} - ${cal} kcal`;
+    document.getElementById("calorieList").appendChild(listItem);
+
+    let feedback = `Today's total: ${totalCalories} kcal. `;
+    if (totalCalories < 1800) feedback += "You're under your goal.";
+    else if (totalCalories <= 2200) feedback += "You're on track!";
+    else feedback += "You've exceeded your daily limit.";
+
+    document.getElementById("calorieSummary").innerText = feedback;
+
+    // Clear inputs
+    document.getElementById("food").value = "";
+    document.getElementById("calories").value = "";
+
+});
+
+document.getElementById("sleepForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const sleepTime = document.getElementById("sleepTime").value;
+  const wakeTime = document.getElementById("wakeTime").value;
+  const resultEl = document.getElementById("sleepResult");
+
+  if (!sleepTime || !wakeTime) {
+    resultEl.textContent = "Please enter both times.";
+    return;
+  }
+
+  const [sh, sm] = sleepTime.split(":").map(Number);
+  const [wh, wm] = wakeTime.split(":").map(Number);
+
+  let sleepMinutes = (wh * 60 + wm) - (sh * 60 + sm);
+  if (sleepMinutes <= 0) sleepMinutes += 1440; // add 24h if cross midnight
+
+  const hours = Math.floor(sleepMinutes / 60);
+  const minutes = sleepMinutes % 60;
+
+  resultEl.classList.remove("sleep-good", "sleep-poor", "sleep-extra");
+
+  if (hours < 7) {
+    resultEl.classList.add("sleep-poor");
+    resultEl.textContent = `You only slept for ${hours}h ${minutes}m – less than recommended.`;
+  } else if (hours <= 9) {
+    resultEl.classList.add("sleep-good");
+    resultEl.textContent = `You slept for ${hours}h ${minutes}m – great job!`;
+  } else {
+    resultEl.classList.add("sleep-extra");
+    resultEl.textContent = `You slept for ${hours}h ${minutes}m – more than needed.`;
+  }
+});
+
+</script>
+  
+  <!-- Footer -->
+  <%- include('partials/footer.ejs') %>
+
+</body>
+</html>
+

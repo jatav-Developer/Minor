@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us - Product Analyzer</title>
+  <link rel="icon" href="Images/Truth4.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+      body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f0f9ff, #e6f7f2);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .about-wrapper {
+      max-width: 1000px;
+      margin: 60px auto;
+      background: #ffffff;
+      padding: 50px 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-size: 36px;
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      border-bottom: 3px solid #27ae60;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    .section {
+      margin-top: 30px;
+    }
+
+    .section h2 {
+      font-size: 24px;
+      color: #27ae60;
+      margin-bottom: 10px;
+    }
+
+    .section p {
+      font-size: 16.5px;
+      line-height: 1.9;
+      margin-bottom: 12px;
+    }
+
+    .highlight {
+      font-weight: 600;
+      color: #1abc9c;
+    }
+
+    .mission-vision {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .mission-vision div {
+      background-color: #f4fcf9;
+      border-left: 6px solid #27ae60;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+    }
+  </style>
+
+</head>
+<body>
+
+    <!-- Navbar -->
+  <%- include('partials/navbar.ejs') %>
+
+  <div class="about-wrapper">
+    <h1>About Product Analyzer</h1>
+
+    <div class="section">
+      <p><span class="highlight">Product Analyzer</span> is your trusted partner in wellness. We aim to simplify your journey toward better health by providing a wide range of health products with complete transparency.</p>
+      <p>Every product listed on our platform includes detailed information such as ingredients, benefits, usage guidelines, and health impacts. This helps users make <strong>informed decisions</strong> tailored to their needs.</p>
+      <p>From fitness supplements to natural remedies, Product Analyzer curates only the best — combining science, quality, and affordability.</p>
+    </div>
+
+    <div class="mission-vision">
+      <div>
+        <h2>Our Mission</h2>
+        <p>To empower individuals with knowledge and access to high-quality health products, creating a transparent and trustworthy health ecosystem.</p>
+      </div>
+      <div>
+        <h2>Our Vision</h2>
+        <p>To become the go-to platform for health-conscious users seeking safe, reliable, and affordable wellness solutions worldwide.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Why Choose Us?</h2>
+      <p>✔️ Verified and quality-tested products</p>
+      <p>✔️ Transparent ingredients and benefits</p>
+      <p>✔️ Personalized user experience</p>
+      <p>✔️ Trusted by thousands of health-aware customers</p>
+    </div>
+
+    </div>
+  <!-- Footer -->
+  <%- include('partials/footer.ejs') %>
+
+</body>
+</html>

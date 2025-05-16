@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Analyzer</title>
+  <link rel="icon" href="Images/Truth4.png">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <%- include('partials/navbar.ejs') %>
+  <div class="content">
+    <h1>Welcome to Health Product Analyzer</h1>
+    <p>Search and analyze health products to know what's best for you!</p>
+  </div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Find the Best Health Products</h1>
+      <p>Compare ingredients, reviews, and health impact to make an informed choice!</p>
+      <button onclick="window.location.href='/products'">Explore Products</button>
+    </div>
+  </section>
+
+  <section class="featured-products">
+    <h2>Featured Health Products</h2>
+      <div class="product-list">
+        <% if (products.length === 0) { %>
+          <p style="text-align: center; font-size: 1.2rem;">❌ No products matched your search.</p>
+        <% } else { %>
+          <% products.forEach(product => { %>
+            <div class="product-card">
+              <img src="<%= product.image %>" alt="<%= product.name %>" width="150">
+              <h3><%= product.name %></h3>
+              <p>Brand: <%= product.brand %></p>
+              <p>Price: ₹<%= product.price %></p>
+              <p class="rating">⭐⭐⭐⭐⭐</p>
+              <a href="/products/<%= product._id %>">View Details</a>
+              <!-- <button onclick="addToCart(1)">Add to Cart</button> -->
+              <% if (session.isAdmin) { %>
+                
+              <% } else { %>
+                <form action="/add-to-cart/<%= product._id %>" method="POST">
+                  <button type="submit">Add to Cart</button>
+                </form>
+              <% } %>
+              
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+      <!-- Add more product cards as needed -->
+    
+  </section>
+  
+
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps-container">
+      <div class="step">
+        <h3>Step 1</h3>
+        <p>Search for health products by category, brand, or ingredient.</p>
+      </div>
+      <div class="step">
+        <h3>Step 2</h3>
+        <p>Compare product ingredients, reviews, and ratings.</p>
+      </div>
+      <div class="step">
+        <h3>Step 3</h3>
+        <p>Make an informed decision and choose the best product for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="testimonial-cards">
+      <div class="testimonial-card">
+        <p>"This website helped me find the best vitamins for my health!"</p>
+        <h4>- John Doe</h4>
+      </div>
+      <div class="testimonial-card">
+        <p>"I love how I can compare the ingredients and reviews before purchasing!"</p>
+        <h4>- Jane Smith</h4>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <%- include('partials/footer.ejs') %>
+
+</body>
+</html>

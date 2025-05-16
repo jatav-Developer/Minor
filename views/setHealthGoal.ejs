@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Set Health Goal</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="Images/Truth4.png">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 60px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #34495e;
+      font-weight: 600;
+    }
+
+    select,input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 25px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+  </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+  <%- include('partials/navbar.ejs') %>
+  <div class="container">
+    <h2>Set Your Health Goal</h2>
+    <form action="/user/health-goal" method="POST">
+      <label for="healthGoal">Health Goal:</label>
+      <select name="healthGoal" id="healthGoal" required>
+        <option value="Lose Weight">Lose Weight</option>
+        <option value="Maintain Weight">Maintain Weight</option>
+        <option value="Gain Muscle">Gain Muscle</option>
+        <option value="Gain Weight">Gain Weight</option>
+        <option value="Athletic performance">Athletic performance</option>
+      </select>
+
+      <label for="activityLevel">Activity Level:</label>
+      <select name="activityLevel" id="activityLevel" required>
+        <option value="Sedentary">Sedentary</option>
+        <option value="Moderate">Moderate</option>
+        <option value="Active">Active</option>
+      </select>
+       <label>Gender:</label>
+      <select name="gender" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label>Age:</label>
+      <input type="number" name="age" min="10" placeholder="min :10" required>
+
+        <label for="height">Height (cm)</label>
+        <input type="number" id="height" name="height" placeholder="170" required>
+        <label for="weight">Weight (kg)</label>
+        <input type="number" id="weight" name="weight" placeholder="65" required>
+      <label>Diet Type:</label>
+      <select name="dietType" required>
+        <option value="Vegetarian">Vegetarian</option>
+        <option value="Non-Vegetarian">Non-Vegetarian</option>
+        <option value="Non-Vegetarian">Mixed</option>
+      </select>
+
+      <label>Food Preference:</label>
+      <select name="foodPreference" required>
+        <option value="Desi">Desi</option>
+        <option value="Modern">Modern</option>
+        <option value="Mixed">Mixed</option>
+      </select>
+
+      <label>Medical History:</label>
+      <select name="medicalhistory" required>
+        <option value="Healthy">Healthy</option>
+        <option value="degestion problem">degestion problem</option>
+        <option value="Diabetes">Diabetes</option>
+        <option value="kidney issues"> kidney issues</option>
+        <option value="liver problems">liver problems</option>
+        <option value="PCOS">PCOS</option>
+        <option value="thyroid">thyroid</option>
+        <option value="allergies">allergies</option>
+      </select>  
+      <% if (user.height && user.weight) { %>
+          <button class="btn">Update Goal</button>
+          <a href="/user/diet-plan" class="btn">Get Diet-Plan</a>
+        <% } else { %>
+          <a href="/user/health-goal" class="btn">Save Goal</a>
+        <% } %>
+    </form>
+  </div>
+
+   <!-- Footer -->
+   <%- include('partials/footer.ejs') %>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="Images/Truth4.png">
+  <style>
+  
+    .signup-container {
+      max-width: 450px;
+      margin: 80px auto;
+      padding: 40px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .signup-container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+    .signup-container input,select {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: 0.3s ease;
+    }
+    .signup-container input:focus {
+      border-color: #4CAF50;
+      outline: none;
+    }
+    .signup-container select:focus {
+      border-color: #4CAF50;
+      outline: none;
+    }
+    .signup-container button {
+      width: 100%;
+      padding: 14px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .signup-container button:hover {
+      background: #388e3c;
+    }
+    .signup-container .links {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .signup-container .links a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <%- include('../partials/navbar.ejs') %>
+  <div class="signup-container">
+    <h2>Create your HealthHub Account</h2>
+    <form action="/signup" method="POST" class="form">
+      <input type="text" name="fullName" placeholder="Full Name" required />
+      <input type="text" name="phone" placeholder="Phone Number" required />
+      <input type="text" name="address" placeholder="Address" required />
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+    <div class="links">
+      <p>Already have an account? <a href="/login">Login</a></p>
+    </div>
+  </div>
+  <!-- Footer -->
+  <%- include('../partials/footer.ejs') %>
+</body>
+</html>
+

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Profile</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="Images/Truth4.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+     
+    }
+
+    .profile-container {
+      max-width: 800px;
+      margin: 60px auto;
+      background: #ffffff;
+      padding: 50px 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #0077ff;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: bold;
+      margin: 0 auto 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin: 10px 0;
+      color: #333;
+    }
+
+    p.subtitle {
+      color: #777;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .info-box {
+      background: #f7f9fc;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05);
+      text-align: left;
+    }
+
+    .info-box label {
+      display: block;
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 5px;
+    }
+
+    .info-box span {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .edit-btn {
+      padding: 12px 25px;
+      background: #0077ff;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .edit-btn:hover {
+      background: #005ad2;
+    }
+  </style>
+</head>
+<body>
+     <!-- Navbar -->
+  <%- include('partials/navbar.ejs') %>
+  
+  <div class="profile-container">
+   
+    <h1><%= user.name %></h1>
+    <p class="subtitle">Welcome to your health profile</p>
+
+    <div class="info-grid">
+      <div class="info-box">
+        <label>Email</label>
+        <span><%= user.email %></span>
+      </div>
+      <div class="info-box">
+        <label>Mobile No.</label>
+        <span><%= user.phone %></span>
+      </div>
+      <div class="info-box">
+        <label>Age</label>
+        <span><%= user.age || 'Not set' %></span>
+      </div>
+      <div class="info-box">
+        <label>Gender</label>
+        <span><%= user.gender || 'Not set' %></span>
+      </div>
+      <div class="info-box">
+        <label>Address</label>
+        <span><%= user.address || 'Not set' %></span>
+      </div>
+      <div class="info-box">
+        <label>Height</label>
+        <span><%= user.height || 'Not set' %> cm</span>
+      </div>
+      <div class="info-box">
+        <label>Weight</label>
+        <span><%= user.weight || 'Not set' %> kg</span>
+      </div>
+      <div class="info-box">
+        <label>HealthGoal</label>
+        <span><%= user.healthGoal || 'Not set' %></span>
+      </div>
+      <div class="info-box">
+        <label>ActivityLevel</label>
+        <span><%= user.activityLevel || 'Not set' %></span>
+      </div>
+    </div>
+
+    <a href="/profile/edit"><button class="edit-btn">Edit Profile</button></a>
+  </div>
+     <!-- Footer -->
+  <%- include('partials/footer.ejs') %>
+</body>
+</html>

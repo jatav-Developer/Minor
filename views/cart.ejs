@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart</title>
+  <link rel="icon" href="Images/Truth4.png">
+
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    
+    .cart-container {
+      max-width: 1000px;
+      margin: 50px auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .cart-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #2c3e50;
+      letter-spacing: 1px;
+    }
+
+    .empty-cart-msg {
+      text-align: center;
+      font-size: 1.3rem;
+      color: #999;
+    }
+
+    .cart-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .cart-table th,
+    .cart-table td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .cart-table thead th {
+      background-color: #f4f6f8;
+      color: #34495e;
+      font-size: 1.1rem;
+    }
+
+    .cart-table tbody tr:hover {
+      background-color: #f9f9f9;
+      transition: background 0.3s ease;
+    }
+
+    .cart-update-form {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .cart-quantity-input {
+      width: 60px;
+      padding: 8px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    .cart-quantity-input:focus {
+      border-color: #3498db;
+    }
+
+    .cart-update-btn {
+      padding: 8px 16px;
+      background: #3498db;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .cart-update-btn:hover {
+      background: #2980b9;
+    }
+
+    .cart-grand-total-row {
+      background-color: #ecf0f1;
+      font-size: 1.2rem;
+    }
+
+    .grand-total-label {
+      text-align: right;
+      font-weight: 600;
+    }
+
+    .checkout-section {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .checkout-btn {
+      padding: 12px 24px;
+      background-color: #27ae60;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .checkout-btn:hover {
+      background-color: #1e8449;
+    }
+    .product-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .product-footer a {
+      padding: 14px 28px;
+      border-radius: 14px;
+      background-color: #0077ff;
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .product-footer a:hover {
+      background-color: #005fd9;
+    }
+
+    .remove-btn {
+  padding: 6px 14px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.remove-btn:hover {
+  background-color: #c0392b;
+}
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <%- include('partials/navbar.ejs') %>
+  
+  <div class="cart-container">
+    <h1 class="cart-title">🛒 Your Shopping Cart</h1>
+
+    <% if (user.cart.length === 0) { %>
+      <p class="empty-cart-msg">Your cart is empty. Browse some amazing health products!</p>
+    <% } else { %>
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Buy</th>
+            <th>Remove</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <% let grandTotal = 0; %>
+          <% user.cart.forEach(item => { 
+               const total = item.productId.price * item.quantity;
+               grandTotal += total;
+          %>
+            <tr>
+              <td><a href="/products/<%= item.productId._id %>"><%= item.productId.name %></a></td>
+              <td>₹<%= item.productId.price %></td>
+              <td>
+                <form action="/cart/update/<%= item.productId._id %>" method="POST" class="cart-update-form">
+                  <input type="number" name="quantity" value="<%= item.quantity %>" min="1" class="cart-quantity-input" />
+                  <button type="submit" class="cart-update-btn">Update</button>
+                </form>
+              </td>
+              <td>₹<%= total %></td>
+              <td>
+                <% if (item.productId.availabilityLinks.length) { %>
+                  <div class="product-footer">
+                    <% item.productId.availabilityLinks.forEach(link => { %>
+                      <a href="<%= link %>" target="_blank">🛒 Buy Now</a>
+                    <% }) %>
+                  </div>
+                <% } %>
+                </td>
+              <td>
+                <form action="/cart/remove/<%= item.productId._id %>" method="POST" onsubmit="return confirm('Remove this item?');">
+                  <button type="submit" class="remove-btn">Remove</button>
+                </form>
+              </td>
+
+            </tr>
+          <% }) %>
+          <tr class="cart-grand-total-row">
+            <td colspan="5" class="grand-total-label">Grand Total:</td>
+            <td><strong>₹<%= grandTotal %></strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+    <% } %>
+  </div>
+
+  <!-- Footer -->
+  <%- include('partials/footer.ejs') %>
+
+</body>
+</html>

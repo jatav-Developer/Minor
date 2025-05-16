@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Diet Plan</title>
+  <link rel="icon" href="Images/Truth4.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f4f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .goal-card {
+      background: #e9f7f1;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .goal-card h3 {
+      color: #28a745;
+    }
+
+    .goal-card p {
+      font-size: 18px;
+    }
+
+    .diet-info {
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .diet-info div {
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      width: 30%;
+    }
+
+    .diet-info div h4 {
+      color: #007bff;
+    }
+
+    .btn {
+      display: block;
+      text-align: center;
+      background-color: #007bff;
+      color: white;
+      padding: 12px 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+   <!-- Navbar -->
+   <%- include('partials/navbar.ejs') %>
+  <div class="container">
+    <h2>Your Personalized Diet Plan</h2>
+
+    <div class="goal-card">
+      <h3>Your Health Goal: <%= user.healthGoal %></h3>
+      <p>Activity Level: <%= user.activityLevel %></p>
+      <p><strong>Daily Calorie Target: </strong> <%= goalCalories %> kcal</p>
+    </div>
+
+    <div class="diet-info">
+      <div>
+        <h4>Carbs</h4>
+        <p><%= carbs %> grams</p>
+      </div>
+      <div>
+        <h4>Protein</h4>
+        <p><%= protein %> grams</p>
+      </div>
+      <div>
+        <h4>Fat</h4>
+        <p><%= fat %> grams</p>
+      </div>
+    </div>
+    <a href="/diet-suggestion" class="btn">View My Diet Plan</a>
+    <a href="/user/dashboard" class="btn">Go Back to Dashboard</a>
+  </div>
+
+   <!-- Footer -->
+   <%- include('partials/footer.ejs') %>
+</body>
+</html>

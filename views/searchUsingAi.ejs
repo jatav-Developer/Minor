@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add New Product</title>
+  <link rel="icon" href="Images/Truth4.png">
+  <link rel="stylesheet" href="/css/style.css">
+   <style>
+    * {
+      box-sizing: border-box;
+    }
+  
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, #f6f9fc, #eaf1ff);
+      margin: 0;
+      padding: 0;
+    }
+  
+    .form-container {
+      max-width: 960px;
+      margin: 60px auto;
+      background-color: #ffffff;
+      padding: 50px;
+      border-radius: 25px;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
+    }
+  
+    h1 {
+      text-align: center;
+      font-size: 2.4rem;
+      margin-bottom: 35px;
+      color: #2c3e50;
+    }
+  
+    .form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px 30px;
+    }
+  
+    .full-width {
+      grid-column: 1 / -1;
+    }
+  
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #34495e;
+    }
+  
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 1rem;
+      border: 1px solid #ced4da;
+      border-radius: 12px;
+      background-color: #f9fbfd;
+      transition: 0.3s ease;
+    }
+  
+    input::placeholder,
+    textarea::placeholder {
+      color: #a0a9b3;
+      font-weight: 400;
+    }
+  
+    input:focus,
+    textarea:focus {
+      outline: none;
+      background-color: #fff;
+      border-color: #5a9dfc;
+      box-shadow: 0 0 8px rgba(90, 157, 252, 0.2);
+    }
+  
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+  
+    .submit-btn {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-top: 30px;
+    }
+  
+    button {
+      padding: 14px 40px;
+      font-size: 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+  
+    button:hover {
+      background-color: #0056b3;
+      transform: translateY(-2px);
+    }
+  
+    @media (max-width: 500px) {
+      .form-container {
+        padding: 30px 20px;
+      }
+  
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+  
+</head>
+<body>
+   <!-- Navbar -->
+   <%- include('partials/navbar.ejs') %>
+  <div class="form-container">
+    <h1>Search About Product</h1>
+    <form action="/products/ai/search" method="POST" class="form">
+      <div>
+        <label for="name">Product Name</label>
+        <input type="text" name="name" id="name" placeholder="e.g. Vitamin C Immunity Booster" required>
+      </div>
+
+      <div>
+        <label for="brand">Brand</label>
+        <input type="text" name="brand" id="brand" placeholder="e.g. Himalaya, OZiva" required>
+      </div>
+      
+      <button class="submit-btn">Submit</button>
+      
+</div>
+      
+  <!-- Footer -->
+  <%- include('partials/footer.ejs') %>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= product.name %> | Product Details</title>
+  <link rel="icon" href="Images/Truth4.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #f8fbff, #edf4ff);
+      color: #2b2b2b;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 25px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    }
+
+    .product-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .product-image {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .product-image img {
+      width: 100%;
+      border-radius: 20px;
+      transition: transform 0.3s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .product-image img:hover {
+      transform: scale(1.03);
+    }
+
+    .product-info {
+      flex: 2;
+    }
+
+    .product-info h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #1a1a1a;
+    }
+
+    .brand-cat {
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    .price-stock {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+
+    .price {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #0077ff;
+    }
+
+    .stock {
+      font-size: 1rem;
+      font-weight: bold;
+      color: "<%= product.inStock ? '#28a745' : '#dc3545' %>";
+    }
+
+    .section {
+      margin-top: 40px;
+    }
+
+    .section h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: #333;
+      border-left: 4px solid #0077ff;
+      padding-left: 10px;
+    }
+
+    .section ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .section ul li {
+      background: #f0f4fa;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .usage {
+      background: #e6f1ff;
+      padding: 20px;
+      border-radius: 14px;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .badge {
+      background-color: #dff5ec;
+      color: #157347;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .product-footer {
+      margin-top: 50px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .product-footer a {
+      padding: 14px 28px;
+      border-radius: 14px;
+      background-color: #0077ff;
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .product-footer a:hover {
+      background-color: #005fd9;
+    }
+
+    @media (max-width: 768px) {
+      .product-header {
+        flex-direction: column;
+      }
+
+      .price-stock {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <%- include('partials/navbar.ejs') %>
+  <div class="container">
+    <div class="product-header">
+      <div class="product-image">
+        <img src="<%= product.image %>" alt="<%= product.name %>">
+      </div>
+      <div class="product-info">
+        <h1><%= product.name %></h1>
+        <div class="brand-cat">
+          <strong>Brand:</strong> <%= product.brand %> | <strong>Category:</strong> <%= product.category %> | <strong>Qty:</strong> <%= product.quantity %>
+        </div>
+        <div class="price-stock">
+          <div class="price">₹<%= product.price %></div>
+          <div class="stock"><%= product.inStock ? '✔ In Stock' : '❌ Out of Stock' %></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Ingredients</h3>
+      <ul>
+        <% product.ingredients.forEach(ing => { %>
+          <li><%= ing %></li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3>Benefits</h3>
+      <ul>
+        <% product.benefits.forEach(b => { %>
+          <li><%= b %></li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3>Usage Instructions</h3>
+      <div class="usage">
+        <%= product.usage %>
+      </div>
+    </div>
+
+    <% if (product.sideEffects.length) { %>
+      <div class="section">
+        <h3>Side Effects</h3>
+        <ul>
+          <% product.sideEffects.forEach(s => { %>
+            <li><%= s %></li>
+          <% }) %>
+        </ul>
+      </div>
+    <% } %>
+
+    <% if (product.warnings.length) { %>
+      <div class="section">
+        <h3>Warnings</h3>
+        <ul>
+          <% product.warnings.forEach(w => { %>
+            <li><%= w %></li>
+          <% }) %>
+        </ul>
+      </div>
+    <% } %>
+
+    <% if (product.certifications.length) { %>
+      <div class="section">
+        <h3>Certifications</h3>
+        <div class="badges">
+          <% product.certifications.forEach(c => { %>
+            <span class="badge"><%= c %></span>
+          <% }) %>
+        </div>
+      </div>
+    <% } %>
+
+    <% if (product.availabilityLinks.length) { %>
+      <div class="product-footer">
+        <% product.availabilityLinks.forEach(link => { %>
+          <a href="<%= link %>" target="_blank">🛒 Buy Now</a>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+  <br>
+   <!-- Footer -->
+   <%- include('partials/footer.ejs') %>
+</body>
+</html>

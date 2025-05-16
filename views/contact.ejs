@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us - Product Analyzer</title>
+  <link rel="icon" href="Images/Truth4.png">
+
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+     body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f0f9ff, #e6f7f2);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .contact-wrapper {
+      max-width: 1000px;
+      margin: 60px auto;
+      background: #ffffff;
+      padding: 50px 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-size: 36px;
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      border-bottom: 3px solid #27ae60;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    .section {
+      margin-top: 30px;
+    }
+
+    .section h2 {
+      font-size: 24px;
+      color: #27ae60;
+      margin-bottom: 10px;
+    }
+
+    .section p {
+      font-size: 16.5px;
+      line-height: 1.9;
+      margin-bottom: 12px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 800px;
+      margin: 30px auto;
+    }
+
+    .contact-form input, .contact-form textarea {
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+
+    .contact-form input:focus, .contact-form textarea:focus {
+      border-color: #27ae60;
+      outline: none;
+    }
+
+    .contact-form button {
+      padding: 12px;
+      background-color: #27ae60;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background-color: #2ecc71;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+   <!-- Navbar -->
+   <%- include('partials/navbar.ejs') %>
+
+  <div class="contact-wrapper">
+    <h1>Contact Us</h1>
+
+    <div class="section">
+      <h2>We'd love to hear from you!</h2>
+      <p>If you have any questions, feedback, or suggestions, feel free to reach out to us. Our team is here to assist you in any way possible.</p>
+    </div>
+
+    <div class="section">
+      <h2>Contact Information</h2>
+      <p><strong>Email:</strong> support@productanalyzer.com</p>
+      <p><strong>Phone:</strong> +91 7880205570</p>
+      <p><strong>Address:</strong> 123 Product Analyzer Street, Wellness City, India</p>
+    </div>
+
+    <div class="section">
+      <h2>Send us a Message</h2>
+      <form action="/contact" method="POST" class="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+
+  </div>
+
+   <!-- Footer -->
+   <%- include('partials/footer.ejs') %>
+</body>
+</html>

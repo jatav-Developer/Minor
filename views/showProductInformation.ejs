@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= product.productName %></title>
+  <link rel="icon" href="Images/Truth4.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+  text-align: unset;
+}
+.hero {
+  background: linear-gradient(135deg, #1e3c72, #2a5298); /* Blue gradient */
+  color: #ffffff;
+  padding: 100px 20px 80px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: url('https://www.transparenttextures.com/patterns/cubes.png');
+  opacity: 0.05;
+  z-index: 0;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  padding: 0 20px;
+}
+
+.hero h1 {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.hero p {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: #e0f7fa;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+
+.container {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+  padding: 25px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #00796b;
+}
+
+ul {
+  padding-left: 20px;
+  list-style-type: none;
+}
+
+ul li {
+  margin-bottom: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.review-section .reviews {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.review-section h3 {
+  margin-bottom: 10px;
+}
+
+.negative {
+  color: #c62828;
+}
+
+.summary {
+  margin-top: 20px;
+  background: #f1f8e9;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.note-card {
+  background-color: #fff8e1;
+  border-left: 6px solid #ffb300;
+  padding: 20px;
+  margin-top: 40px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+  </style>
+</head>
+<body>
+        <!-- Navbar -->
+  <%- include('partials/navbar.ejs') %>
+  <header class="hero">
+    <div class="hero-content">
+      <h1><%= product.productName %></h1>
+      <p><%= product.description %></p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>🔥 Key Features</h2>
+      <ul>
+        <% product.keyFeatures.forEach(feature => { %>
+          <li>✔️ <%= feature %></li>
+        <% }) %>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>📊 Nutritional Info (Per Serving)</h2>
+      <table>
+        <% for (let key in product.typicalNutritionalInformationPerServing) { %>
+          <tr>
+            <td><strong><%= key %></strong></td>
+            <td><%= product.typicalNutritionalInformationPerServing[key] %></td>
+          </tr>
+        <% } %>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>🧪 Ingredients</h2>
+      <ul>
+        <% product.typicalIngredients.forEach(item => { %>
+          <li>🌿 <%= item %></li>
+        <% }) %>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>💪 Benefits</h2>
+      <ul>
+        <% product.potentialBenefits.forEach(b => { %>
+          <li>✅ <%= b %></li>
+        <% }) %>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>🥤 How to Use</h2>
+      <ul>
+        <% product.howToUse.forEach(step => { %>
+          <li>📝 <%= step %></li>
+        <% }) %>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>👥 Suitable For</h2>
+      <ul>
+        <% product.suitability.forEach(s => { %>
+          <li>👤 <%= s %></li>
+        <% }) %>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>🍫 Flavor Variants</h2>
+      <ul>
+        <% product.flavorVariations.forEach(f => { %>
+          <li>🍧 <%= f %></li>
+        <% }) %>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>🏅 Certifications</h2>
+      <ul>
+        <% product.certifications.forEach(c => { %>
+          <li>📌 <%= c %></li>
+        <% }) %>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>🎖️ Awards</h2>
+      <ul>
+        <% product.awards.forEach(a => { %>
+          <li>🏆 <%= a %></li>
+        <% }) %>
+      </ul>
+    </section>
+
+    <section class="card review-section">
+      <h2>💬 Customer Reviews</h2>
+      <div class="reviews">
+        <div>
+          <h3>👍 Positive</h3>
+          <% product.customerReviews.positive.forEach(r => { %>
+            <p><strong><%= r.user %>:</strong> <%= r.comment %></p>
+          <% }) %>
+        </div>
+        <div>
+          <h3>👎 Negative</h3>
+          <% product.customerReviews.negative.forEach(r => { %>
+            <p class="negative"><strong><%= r.user %>:</strong> <%= r.comment %></p>
+          <% }) %>
+        </div>
+      </div>
+      <p class="summary">🧾 <strong>Summary:</strong> <%= product.customerReviews.summary %></p>
+    </section>
+
+    <section class="note-card">
+      <p>⚠️ <strong>Note:</strong> <%= product.importantNote %></p>
+    </section>
+  </main>
+    <!-- Footer -->
+  <%- include('partials/footer.ejs') %>
+</body>
+</html>
