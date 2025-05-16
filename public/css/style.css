@@ -111,40 +111,49 @@ body
 
 
 
-  /* Footer Styling */
+/* Footer Styling */
 footer {
-    background-color:rgba(52, 58, 64, 0.95);
+    position: fixed;              /* Fixed at bottom */
+    bottom: 0;                    /* Stick to bottom */
+    left: 0;
+    width: 100%;                  /* Full width */
+    height: 80px;                 /* Optional: adjust as needed */
+    background-color: rgba(52, 58, 64, 0.95);
     color: #bbb;
     padding: 20px 0;
     text-align: center;
     box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-    margin-top: auto;
-    
-  }
-  
-  footer p {
+    z-index: 1000;                /* Stay above other content */
+}
+
+/* Add bottom padding to body so content doesn't hide behind footer */
+body {
+    padding-bottom: 80px; /* Same as footer height */
+}
+
+footer p {
     font-size: 14px;
     margin: 10px 0;
-  }
-  
-  footer .footer-links {
+}
+
+footer .footer-links {
     margin-top: 20px;
-  }
-  
-  footer .footer-links a {
+}
+
+footer .footer-links a {
     margin: 0 15px;
     color: #bbb;
     text-decoration: none;
     font-size: 16px;
     position: relative;
     transition: color 0.3s ease;
-  }
-  
-  footer .footer-links a:hover {
+}
+
+footer .footer-links a:hover {
     color: #5cb85c;
-  }
-  
-  footer .footer-links a::after {
+}
+
+footer .footer-links a::after {
     content: "";
     position: absolute;
     bottom: -5px;
@@ -154,11 +163,12 @@ footer {
     background-color: #5cb85c;
     opacity: 0;
     transition: opacity 0.3s ease;
-  }
-  
-  footer .footer-links a:hover::after {
+}
+
+footer .footer-links a:hover::after {
     opacity: 1;
-  }
+}
+
 
   /* Media Queries for Mobile */
 @media (max-width: 768px) {
